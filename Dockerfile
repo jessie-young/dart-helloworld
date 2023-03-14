@@ -26,7 +26,6 @@ ENV PATH $DART_SDK/bin:$PATH
 COPY --from=build /runtime/ /
 # Copy Dart binaries and snapshots required to run the Dart binary.
 COPY --from=build /usr/lib/dart/bin/dart /usr/lib/dart/bin/dart
-COPY --from=build /usr/lib/dart/bin/dartaotruntime /usr/lib/dart/bin/dartaotruntime
 COPY --from=build /usr/lib/dart/bin/snapshots/dartdev.dill /usr/lib/dart/bin/snapshots/dartdev.dill
 
 # Copy files required for entrypoint
