@@ -7,3 +7,5 @@ build/
 .gitignore
 .idea/
 .packages
+tired-proxy
+CHANGELOG.md

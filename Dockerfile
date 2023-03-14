@@ -1,3 +1,5 @@
+FROM lubien/tired-proxy:2 as proxy
+
 # In future we may want to specify the Dart SDK base image version using dart:<version> (ex: dart:2.19)
 # for now we default to stable.
 FROM dart:stable AS build
@@ -5,6 +7,8 @@ FROM dart:stable AS build
 # Resolve app dependencies.
 WORKDIR /app
 COPY pubspec.* ./
+COPY entrypoint.sh /entrypoint.sh
+
 RUN dart pub get
 
 # Copy app source code and kernel compile it.
@@ -27,6 +31,8 @@ COPY --from=build /usr/lib/dart/bin/snapshots/dartdev.dart.snapshot /usr/lib/dar
 # Copy the users compiled kernel snapshot.
 COPY --from=build /app/bin/snapshot.kernel /app/bin/
 
+COPY --from=proxy /tired-proxy /tired-proxy
+
 # Start server.
 EXPOSE 8080
-CMD ["dart", "run", "/app/bin/snapshot.kernel"]
+ENTRYPOINT ["/entrypoint.sh"]

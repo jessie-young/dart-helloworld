@@ -1,3 +1,5 @@
+`./bin/server & ./tired-proxy --port 8080 --host http://localhost:9090 --time 5`
+
 A server app built using [Shelf](https://pub.dev/packages/shelf),
 configured to enable running with [Docker](https://www.docker.com/).
 
